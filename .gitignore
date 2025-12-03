@@ -2,3 +2,4 @@
 artifacts
 contracts/artifacts
 .states
+remix.config.json

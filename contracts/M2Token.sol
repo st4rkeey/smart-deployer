@@ -10,6 +10,6 @@ contract M2Token is ERC20, ERC20Permit {
         ERC20("M2Token", "M2T")
         ERC20Permit("M2Token")
     {
-        _mint(recipient, 1000 * 10 ** decimals());
+        _mint(recipient, 10000 * 10 ** decimals());
     }
 }

@@ -1,24 +1,23 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.29;
 
-import "../IUtilityContract.sol";
+import "../UtilityContract/IUtilityContract.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract ERC721Airdropper is IUtilityContract, Ownable {
-    constructor() Ownable(msg.sender) payable {}
+    constructor() payable Ownable(msg.sender) {}
 
     IERC721 public token;
     address public treasury;
 
-    uint256 constant public MAX_AIRDROP_BATCH_SIZE = 300;
+    uint256 public constant MAX_AIRDROP_BATCH_SIZE = 300;
 
     error AlreadyInitialized();
     error NoApprovedTokens();
     error ArraysLengthMissmatch();
     error TransferFailed();
     error BatchSizeExceeded();
-
 
     modifier NotInitialized() {
         require(!initialized, AlreadyInitialized());
@@ -27,7 +26,7 @@ contract ERC721Airdropper is IUtilityContract, Ownable {
 
     bool private initialized;
 
-    function initialize(bytes memory _initData) external NotInitialized returns (bool) {
+    function initialize(bytes memory _initData) external override NotInitialized returns (bool) {
         (address _tokenAddress, address _treasury, address _owner) = abi.decode(_initData, (address, address, address));
 
         token = IERC721(_tokenAddress);

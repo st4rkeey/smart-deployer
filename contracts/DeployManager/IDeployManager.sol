@@ -7,11 +7,22 @@ interface IDeployManager {
     event ContractStatusUpdated(address _contractAddress, bool _isActive, uint256 _timestamp);
     event NewDeployment(address _contractAddress, address _deployer, uint256 _fee, uint256 _timestamp);
 
+    struct ContractInfo {
+        uint256 fee;
+        bool isActive;
+        uint256 registeredAt;
+    }
+
+    error ContractNotActive();
+    error InsufficientFunds();
+    error ContractDoesNotExist();
+    error DeployFailed();
+
     function deploy(address _utilityContract, bytes calldata _initData) external payable returns (address);
 
     function addNewContract(address _contractAddress, uint256 _fee, bool _isActive) external;
 
     function updateFee(address _contractAddress, uint256 _newFee) external;
 
-    function updateStatus(address _contractAddress, bool _isActive) external;
+    function changeContractStatus(address _contractAddress, bool _isActive) external;
 }

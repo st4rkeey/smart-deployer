@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.29;
 
-import "../IUtilityContract.sol";
+import "../UtilityContract/IUtilityContract.sol";
 import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract ERC1155Airdropper is IUtilityContract, Ownable {
-    constructor() Ownable(msg.sender) payable {}
+    constructor() payable Ownable(msg.sender) {}
 
-    uint256 constant public MAX_AIRDROP_BATCH_SIZE = 300;
+    uint256 public constant MAX_AIRDROP_BATCH_SIZE = 300;
 
     IERC1155 public token;
     address public treasury;
@@ -27,7 +27,7 @@ contract ERC1155Airdropper is IUtilityContract, Ownable {
 
     bool private initialized;
 
-    function initialize(bytes memory _initData) external NotInitialized returns (bool) {
+    function initialize(bytes memory _initData) external override NotInitialized returns (bool) {
         (address _tokenAddress, address _treasury, address _owner) = abi.decode(_initData, (address, address, address));
 
         token = IERC1155(_tokenAddress);

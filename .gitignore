@@ -3,3 +3,12 @@ artifacts
 contracts/artifacts
 .states
 remix.config.json
+out
+cache
+.gitmodules
+node_modules
+.DS_Store
+yarn.lock
+package.json
+.vscode
+foundry.lock

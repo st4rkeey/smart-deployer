@@ -8,17 +8,20 @@ import {IUtilityContract} from "./IUtilityContract.sol";
 abstract contract AbstractUtilityContract is IUtilityContract, ERC165 {
     address public deployManager;
 
+    /// @inheritdoc IUtilityContract
     function initialize(bytes calldata _initData) external virtual override returns (bool) {
         deployManager = abi.decode(_initData, (address));
         setDeployManager(deployManager);
         return true;
     }
 
+    /// @inheritdoc IUtilityContract
     function setDeployManager(address _deployManager) internal virtual {
         require(validateDeployManager(_deployManager), FailedToDeployManager());
         deployManager = _deployManager;
     }
 
+    /// @inheritdoc IUtilityContract
     function validateDeployManager(address _deployManager) internal view returns (bool) {
         require(_deployManager != address(0), DeployManagerCannotBeZeroAddress());
 

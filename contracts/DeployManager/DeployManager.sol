@@ -31,7 +31,7 @@ contract DeployManager is IDeployManager, Ownable, ERC165 {
         bool success = IUtilityContract(clone).initialize(_initData);
         require(success, DeployFailed());
 
-        (bool sent, ) = payable(owner()).call{value: info.fee}("");
+        (bool sent,) = payable(owner()).call{value: info.fee}("");
         require(sent, TransactionFailed());
 
         deployedContracts[msg.sender].push(clone);
@@ -44,8 +44,8 @@ contract DeployManager is IDeployManager, Ownable, ERC165 {
     /// @inheritdoc IDeployManager
     function addNewContract(address _contractAddress, uint256 _fee, bool _isActive) external override onlyOwner {
         require(
-        AbstractUtilityContract(_contractAddress).supportsInterface(type(IUtilityContract).interfaceId), 
-        ContractIsNotUtilityContract()
+            AbstractUtilityContract(_contractAddress).supportsInterface(type(IUtilityContract).interfaceId),
+            ContractIsNotUtilityContract()
         );
         require(contractsData[_contractAddress].registeredAt == 0, ContractAlreadyRegistered());
 
@@ -73,8 +73,6 @@ contract DeployManager is IDeployManager, Ownable, ERC165 {
 
     /// @inheritdoc ERC165
     function supportsInterface(bytes4 interfaceId) public view virtual override(IERC165, ERC165) returns (bool) {
-        return
-            interfaceId == type(IDeployManager).interfaceId ||
-            super.supportsInterface(interfaceId);
+        return interfaceId == type(IDeployManager).interfaceId || super.supportsInterface(interfaceId);
     }
 }

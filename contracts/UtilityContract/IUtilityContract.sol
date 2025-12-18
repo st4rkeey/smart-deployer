@@ -4,7 +4,6 @@ pragma solidity ^0.8.29;
 import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 
 interface IUtilityContract is IERC165 {
-
     // ----------------------------------------------------------------
     // Errors
     // ----------------------------------------------------------------

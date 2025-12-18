@@ -7,7 +7,6 @@ import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
 /// @author webb3george
 /// @notice Interface defines the functions, errors and events for the DeployManager contract
 interface IDeployManager is IERC165 {
-
     // ----------------------------------------------------------------
     // Events
     // ----------------------------------------------------------------
@@ -95,7 +94,7 @@ interface IDeployManager is IERC165 {
     /// @dev Emits a ContractFeeUpdated event upon successful fee update
     function updateFee(address _contractAddress, uint256 _newFee) external;
 
-    /// @notice Changes contact status 
+    /// @notice Changes contact status
     /// @param _contractAddress The address of the utility contract to update status
     /// @param _isActive New contract status value
     /// @dev Emits a ContractStatusUpdated event upon successful status update
